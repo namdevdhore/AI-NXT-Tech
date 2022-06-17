@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import { useReactMediaRecorder } from "react-media-recorder";
 import './App.css';
-
+import { useState } from "react";
+import Location from "./Component/Location";
+import Networks from "./Component/Network";
 function App() {
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
+    useReactMediaRecorder({ video: true });
+
+
   return (
+    <>
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Networks/>
+      <Location/>
+      <div>
+
+        <br/>
+        <video src={mediaBlobUrl} controls autoPlay loop /><br/>
+        <button onClick={startRecording}>Start Recording</button>
+        <button onClick={stopRecording}>Stop Recording</button>
+      </div>
+      
     </div>
+    </>
+    
   );
 }
 
