@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export default function  Location () {
     const [load, setLoad] = useState(null)
     const [latitude, setLatitude] = useState(null);
@@ -18,13 +18,16 @@ export default function  Location () {
       setLongitude(position.coords.longitude);
       setLoad(true);
     }
+    useEffect(()=>{
+      getLocation();
+    },[])
 
     return(
         <>
         <div style={{border:"20px", pading:"20px", margin:"20px"}}>
-            <div style={{fotSize:"15px"}}>Get Location</div>
+            <div style={{fotSize:"15px"}}>Location</div>
             <be/>
-            <button onClick={getLocation} style={{backgroundColor:"blueviolet", margin:"20px"}}>Get coordinates</button>
+            {/* <button onClick={getLocation} style={{backgroundColor:"blueviolet", margin:"20px"}}>Get coordinates</button> */}
             {load===false?<div>Getting coordinates</div>:''}
             {load===true? <div><h4> latitude: {latitude}</h4><h4>longitude: {longitude}</h4>
             </div>:''}

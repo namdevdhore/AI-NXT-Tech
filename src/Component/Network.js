@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import "./styles.css";
 
 export default function Networks() {
@@ -39,13 +39,25 @@ export default function Networks() {
     }
   }
 
+ 
+
+  useEffect(()=>{
+    let timer = setTimeout(() => MeasureConnectionSpeed(),  2000);
+ 
+    return () => {
+      clearTimeout(timer);
+    };
+  })
+
+
   return (
     <div className="App" style={{border:"20px", pading:"20px", margin:"20px"}}>
-      <button onClick={MeasureConnectionSpeed} style={{backgroundColor:"yellow"}}>
+      {/* <button onClick={MeasureConnectionSpeed} style={{backgroundColor:"yellow"}}>
         Check your Internet speed
-      </button>
+      </button> */}
+
       {sta === true ? <div style={{border:"20px", pading:"20px", margin:"20px", fontSize:"20px"}}>Calculating Speed ...</div> : ""}
-      {sta === false ? <h1>Your download speed is: {speed}</h1> : ""}
+      {sta === false ? <h1>{speed}</h1> : ""}
       {fail === true ? <h1>Error in Calculating Speed</h1> : ""}
     </div>
   );
